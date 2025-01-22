@@ -14,3 +14,4 @@ soupsieve==2.6
 typing_extensions==4.12.2
 upstash-vector==0.7.0
 urllib3==2.3.0
+Flask==3.0.2
