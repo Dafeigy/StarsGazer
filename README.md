@@ -1,6 +1,7 @@
-## 数据获取与整理
+## Targets
 
-## 爬取逻辑
+Help search the specific repo among your starred repos.
 
-输入一个URL，获取当页所有的记录
+## Tech
 
+Vercel. Database. Front/Backend.
