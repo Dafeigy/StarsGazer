@@ -2,51 +2,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Search</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .search-form {
-            margin-bottom: 20px;
-        }
-        .search-input {
-            width: 70%;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .search-button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        .result-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{url_for("static",filename="style.css")}}">
+    <title>StarGazers: Search your starred repos</title>
 </head>
 <body>
-    <h1>Star Search</h1>
-    <form class="search-form" action="/search" method="POST">
-        <input class="search-input" type="text" name="query" placeholder="Search repositories..." required>
-        <button class="search-button" type="submit">Search</button>
-    </form>
+    <div id="main">
+        <div id="navigate">hihi</div>
+        <div id="container">
+            <h1>Which star you wanna gaze?</h1>
+            <form>
+                <label for="query"></label>
+                <input type="text" id="userinput" name="query" placeholder="Search your repo:" required minlength="4" maxlength="8">
+                <button type="submit">提交</button>
+            </form>
 
-    {% if results %}
-    <div class="results">
-        {% for result in results %}
-        <div class="result-item">
-            <h3>{{ result.name }}</h3>
-            <p>{{ result.description }}</p>
-            <p>Stars: {{ result.stars }}</p>
         </div>
-        {% endfor %}
     </div>
-    {% endif %}
 </body>
 </html>
