@@ -3,21 +3,14 @@
     padding: 0;
 }
 
-body{
-    background: #666;
+:root{
+  --primary-color: #202222;
+  --second-color: #191A1A;
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-      --background-color: #121212;
-      --text-color: #ffffff;
-    }
-  }
-  
-@media (prefers-color-scheme: light) {
-:root {
-    --background-color: #ffffff;
-    --text-color: #000000;
-    }
+
+body{
+    background: #202222;
+    color: #FCFDF8;
 }
   
 @media only screen and (orientation: landscape) {
@@ -28,32 +21,99 @@ body{
       justify-content: center;
     }
     #main{
-        height: 95vmin;
+        height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: row;
-        aspect-ratio: 16/9;
-        background-color: #F3F4EF;
+        background-color: #202222;
         border-radius: 1%;
         align-items: center;
     }
     #navigate{
-        width: 20%;
-        height: 95%;
-        background-color: #F3F4EF;
+        width: 25vmin;
+        height: 100%;
+        background-color: #202222;
+        text-align: center;
     }
     #container{
-        width: 80%;
-        height: 95%;
-        background-color: #FCFDF8;
+        width: calc(98% - 25vmin);
+        height: 98%;
+        background-color: #191A1A;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        border-radius: 1rem;
+    }
+    #searchwindow{
+      margin-top: 4vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: min(80%,80vmin);
+      height: 16%;
+      background-color: var(--primary-color);
+      border-radius: .2rem;
+      border: .15rem solid #3C3E3F;
+    }
+    #searchwindow>form{
+      width: 95%;
+      height: 50%;
     }
     #userinput{
-        width: 50%;
-        height:100%;
+        color: #FCFDF8;
+        width: 100%;
+        height:50%;
+        font-size: 16px;
+        border: none;
+        text-align: left; 
+        vertical-align: top;
+        background-color: var(--primary-color);
+        outline: none;
     }
+    #control{
+      width: 100%;
+      display: flex;
+      /* background-color: aquamarine; */
+      height: 25%;
+    }
+    #settings, #search{
+      display: flex;
+      width: 50%;
+    }
+    #search{
+      align-items: right;
+      justify-content: right;
+    }
+    .btn{
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+      justify-self: center;
+      border-radius: 1.5rem;
+      justify-content: center;
+      height: 100%;
+      margin: 1vmin;
+      color: #8C9090;
+      cursor: pointer;
+    }
+    .btn:hover,.bool:hover{
+      background-color: #3C3E3F;
+    }
+    .bool{
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+      justify-self: center;
+      border-radius: 1.5rem;
+      justify-content: center;
+      height: 100%;
+      margin: 1vmin;
+      color: #8C9090;
+      cursor: pointer;
+    }
+  
   }
   @media only screen and (orientation: portrait) {
     body {
