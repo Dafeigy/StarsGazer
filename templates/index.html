@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{url_for("static",filename="style.css")}}">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.js"></script>
     <script src="{{url_for('static',filename='main.js')}}"></script>
-    <title>StarGazers: Search your starred repos</title>
+    <title>✨StarGazer</title>
 </head>
 <body>
     <div id="main">
@@ -35,11 +35,11 @@
             </div>
         </div>
         <div id="container">
-            <h1>Which star you wanna gaze?</h1>
+            <h1>✨Which star to gaze today?</h1>
             <div id="searchwindow">
                 <form>
                     <label for="query"></label>
-                    <input type="text" id="userinput" name="query" placeholder="Search your starred repo:" minlength="6" maxlength="100" autocomplete="off" >
+                    <input type="text" id="userinput" name="query" placeholder="Describe your starred repo: " minlength="6" maxlength="100" autocomplete="off" >
                 </form>
                 <div id="control">
                     <div id="settings">
