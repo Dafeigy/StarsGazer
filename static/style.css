@@ -35,7 +35,7 @@ button{
 
 a{
   text-decoration: none;
-  color: salmon;
+  color: rgb(56, 125, 230);
 }
 
 body{
@@ -271,7 +271,7 @@ body{
 
     .repo img{
       scale: 90%;
-      border-radius: 10%;
+      border-radius: 20%;
       border: .15rem solid #3C3E3F;
       align-items: center;
       justify-content: center;
