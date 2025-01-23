@@ -18,6 +18,18 @@
   --second-color: #191A1A;
 }
 
+#debug{
+  width:90%;
+  background-color: #191A1A;
+  word-wrap: break-word;
+  border: .2vh solid #8C9090;
+  border-radius: 1vh;
+  height: 70%;
+  justify-content: left;
+  text-align: left;
+  padding: 4%;
+}
+
 textarea{
   resize: none;
   border: none;
