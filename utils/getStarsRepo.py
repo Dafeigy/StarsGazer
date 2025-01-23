@@ -74,7 +74,11 @@ headers = {
     "content-type": "text/html; charset=utf-8"
 }
 
-
+def get_repo_details(url):
+    """
+    TODO: This will be my new year project
+    """
+    pass
 # 示例用法
 if __name__ == "__main__":
     start_url = "https://github.com/dafeigy?tab=stars"
