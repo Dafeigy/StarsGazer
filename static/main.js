@@ -14,7 +14,7 @@ function updateStatus(){
         success:function (data) {
             document.getElementById("Sync").disabled = false
             $("#userinput").disabled= false
-            $("#status").text(`Repo Nums: ${data.All}`);
+            $("#status").text(`Repo Nums: ${data.data}`);
             console.log(data)
         },
         error:function (data) {
