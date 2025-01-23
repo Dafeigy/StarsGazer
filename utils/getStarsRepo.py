@@ -53,11 +53,27 @@ def find_next(base_url: str,
         print(f"请求失败: {e}")
         return url_list
 
+def process_single_page(url):
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+        "content-type": "text/html; charset=utf-8"
+        }
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, "lxml")
+    search_field = soup.find('div', class_ = "col-lg-12")
+    temp = [each.find("p") for each in search_field.findAll("div", class_='py-1')]
+    descriptions = [each.text.strip().replace("\n","") if each else "Woops! there is No description about this project" for each in temp]
+    base_url = "https://github.com"
+    links = [base_url+each.find("a")['href'] for each in search_field.findAll("h3")]
+    names = [each.split("/")[-1] for each in links]
+    update_time = [each.get("datetime") for each in search_field.findAll("relative-time")]
+    return [{"RepoName":name, "Description":des, "Link": link, "UpdateTime": update}for name, des, link, update in zip(names, descriptions, links, update_time)]
 # 请求头配置
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
     "content-type": "text/html; charset=utf-8"
 }
+
 
 # 示例用法
 if __name__ == "__main__":

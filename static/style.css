@@ -25,6 +25,14 @@ textarea{
   
 }
 
+button{
+	/* 清除默认边框 */
+	border:0;
+	outline:none;
+   /*清除默认背景 */
+   background-color: transparent;
+	}
+
 body{
     background: #202222;
     color: #FCFDF8;
@@ -132,6 +140,11 @@ body{
     #settings, #search{
       display: flex;
       width: 50%;
+    }
+
+    #settings>svg{
+      width: auto;
+      height: 60%;
     }
     #search{
       align-items: right;
