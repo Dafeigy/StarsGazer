@@ -321,27 +321,14 @@ body{
     .starlogo,.forklogo,.langlogo,.scorelogo,.simlogo{
       margin-left: 1%;
       margin-right: 1%;
+      color: #2eb1b1;
     }
     
     .forks,.stars{
-      /* width: 5vmin; */
-      padding-left: 1%;
-      /* background-color: antiquewhite; */
+      padding-left: .5%;
     }
-    .starlogo{
-      color: rgb(208, 132, 40);
-    }
-    .forklogo{
-      color: #5248de;
-    }
-    /* .langlogo{
-      color: #5daabb;
-    }
-    .scorelogo{
-      color: #b33c4e;
-    } */
-    .simlogo{
-      color: #2eb1b1;
+    .sim{
+      color: #3CB371;
     }
     .info{
       width: 90%;

@@ -5,6 +5,7 @@ import os
 from config import database_token,database_url
 from upstash_vector import Index
 import random
+import time
 
 
 # GITHUB_USER=os.environ['GITHUB_USER']
@@ -31,7 +32,7 @@ def updateRepoStatus():
     print(f"[Github]Sync starred repos from Github user {GITHUB_USER}: Success.")
     try:
         vectors = [
-            (f"id{index+1}",f"{value['RepoName']}: {value['Description']}",value) for index,value in enumerate(res)
+            (f"id{index+1}",f"{value['RepoName']}: {value['Description']}",value) for index,value in enumerate(res[::-1])
         ]
         
         vecdb_res = index.upsert(
@@ -42,10 +43,30 @@ def updateRepoStatus():
         # return {"data": "Failed => vecdb"}
         return res
 
-    return {"data": len(vectors)}
+    return {"RepoNums": len(vectors)}
+
+@app.route("/fakesearch")
+def fakesearch():
+    time.sleep(3)
+    return all_res[random.randint(0,5):random.randint(5,10)]
 
 @app.route("/search")
+def realsearch():
+    return "HI"
+
+@app.route('/search', methods=['POST'])
 def search():
-    return all_res[random.randint(0,5):random.randint(5,10)]
+    data = request.get_json()
+    user_query = data.get('keyword')
+    if user_query:
+        res = index.query(
+            data=user_query,
+            top_k=5,
+            include_vectors=True,
+            include_metadata=True
+        )
+        return res
+    else:
+        return {"result": "Error. Cannot get search keywords."}
 if __name__ == '__main__':
     app.run(debug=True)
