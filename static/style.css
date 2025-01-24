@@ -185,10 +185,11 @@ body{
       width: 50%;
     }
 
-    #settings>svg{
+    #Sync>svg{
       width: auto;
       height: 60%;
     }
+
     #search{
       align-items: right;
       justify-content: right;
@@ -222,6 +223,42 @@ body{
     #searchbtn:hover{
       background-color: #8C9090;
       color: #FCFDF8;
+    }
+    #loader{
+      width: 3vmin;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .loading {
+      width: 1vmin;
+      height: 1vmin;
+      border: .3vmin solid #d9ab2d;
+      border-top-color: transparent;
+      border-radius: 100%;
+      animation: circle infinite 0.75s linear;
+    }
+    .success,.error{
+      width: 1vmin;
+      height: 1vmin;
+      
+      border-top-color: transparent;
+      border-radius: 100%;
+    }
+    .success{
+      border: .3vmin solid #3CB371;
+    }
+    .error{
+      border: .3vmin solid salmon;
+    }
+    @keyframes circle {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
     #status{
       display: flex;
