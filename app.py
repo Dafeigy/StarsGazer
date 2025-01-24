@@ -4,6 +4,8 @@ from config import *
 import os
 from config import database_token,database_url
 from upstash_vector import Index
+import random
+
 
 # GITHUB_USER=os.environ['GITHUB_USER']
 GITHUB_USER='dafeigy'
@@ -35,17 +37,15 @@ def updateRepoStatus():
         vecdb_res = index.upsert(
             vectors=vectors
         )
-        print(f"[Upstash] Uploading data to vecdb: {vecdb_res}.")
+        print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
     except Exception as e:
-        return {"data": "Failed => vecdb"}
+        # return {"data": "Failed => vecdb"}
+        return res
 
     return {"data": len(vectors)}
 
 @app.route("/search")
 def search():
-    return [
-        {'RepoName': 'corne-xiao', 'Description': 'Woops! there is No description about this project', 'Link': 'https://github.com/friction07/corne-xiao', 'UpdateTime': '2024-11-27T15:34:32Z'},
-        {'RepoName': 'crkbd', 'Description': 'Corne keyboard, a split keyboard with 3x6 column staggered keys and 3 thumb keys.', 'Link': 'https://github.com/foostan/crkbd', 'UpdateTime': '2025-01-16T15:25:50Z'}
-        ]
+    return all_res[random.randint(0,5):random.randint(5,10)]
 if __name__ == '__main__':
     app.run(debug=True)

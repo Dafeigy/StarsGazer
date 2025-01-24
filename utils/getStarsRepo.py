@@ -66,24 +66,24 @@ def process_single_page(url):
     req = requests.get(url, headers=headers,verify=False,proxies=proxy)
     soup = BeautifulSoup(req.text, "lxml")
     search_field = soup.find('div', class_ = "col-lg-12")
+    langsdiv = search_field.findAll("div", class_='f6 color-fg-muted mt-2')
+    langs = [each.find("span",attrs={"itemprop": "programmingLanguage"}) for each in langsdiv]
+    langs = [each.text if each else "None" for each in langs]
+    snfs = [each.find_all("a",class_="Link--muted mr-3") for each in langsdiv]
+    stars = [each[0].text.strip().replace("\n","") for each in snfs]
+    forks = [0 if len(each)==1 else each[1].text.strip().replace("\n","") for each in snfs]
     temp = [each.find("p") for each in search_field.findAll("div", class_='py-1')]
     descriptions = [each.text.strip().replace("\n","") if each else "Woops! there is No description about this project" for each in temp]
     base_url = "https://github.com"
     links = [base_url+each.find("a")['href'] for each in search_field.findAll("h3")]
     names = [each.split("/")[-1] for each in links]
     update_time = [each.get("datetime") for each in search_field.findAll("relative-time")]
-    return [{"RepoName":name, "Description":des, "Link": link, "UpdateTime": update}for name, des, link, update in zip(names, descriptions, links, update_time)]
+    return [{"RepoName":name, "Description":des, "Link": link, "Language":lang, "Star":star, "Fork":fork, "UpdateTime": update}for name, des, link, lang, star, fork, update in zip(names, descriptions, links, langs, stars, forks, update_time)]
 # 请求头配置
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
     "content-type": "text/html; charset=utf-8"
 }
-
-def get_repo_details(url):
-    """
-    TODO: This will be my new year project
-    """
-    pass
 # 示例用法
 if __name__ == "__main__":
     start_url = "https://github.com/dafeigy?tab=stars"
