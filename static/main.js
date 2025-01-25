@@ -1,5 +1,16 @@
 Prism.highlightAll()
 var threshold = 0.75;
+
+var userinput = document.getElementById("userinput")
+var results = document.getElementById("results")
+document.getElementById("userinput").addEventListener('input', function(){
+    if (userinput.value.trim() === "" && results){
+        results.innerHTML = ''
+    }
+})
+
+
+
 function updateStatus(){
     document.getElementById("Sync").disabled = true
     console.log("Syncing Data Now...")
@@ -140,13 +151,6 @@ $("#Sync").click(function(){
 })
 
 
-var userinput = document.getElementById("userinput")
-var results = document.getElementById("results")
-document.getElementById("userinput").addEventListener('input', function(){
-    if (userinput.value.trim() === "" && results){
-        results.innerHTML = ''
-    }
-})
 
 $("#userinput").keydown( function(event){
     event=(event)?event:((window.event)?window.event:"");
@@ -164,3 +168,5 @@ $("#userinput").keydown( function(event){
 $('#threshold').bind('input propertychange', function() {  
     $('#slideValue').html($(this).val());  
 });  
+
+

@@ -36,6 +36,9 @@
 :root{
   --primary-color: #202222;
   --second-color: #191A1A;
+  --theme-color: #3CB371;
+  --border-color: #3C3E3F;
+  --white-color: #8C9090;
 }
 
 #debug{
