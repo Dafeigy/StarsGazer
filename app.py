@@ -2,12 +2,32 @@ from flask import Flask, render_template, request
 import utils.getStarsRepo as gAPI
 import os
 from upstash_vector import Index
+import aiohttp
+import asyncio
 
+proxy = "http://127.0.0.1:7890"
+
+async def fetch_with_(url, headers, proxy):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, headers=headers, proxy=proxy) as response:
+            return await response.json()
+
+async def fetch_multiple_urls(urls, headers, proxy):
+    tasks = [fetch_with_(url, headers, proxy) for url in urls]
+    return await asyncio.gather(*tasks)
+
+urls = [
+    f"https://api.github.com/user/1567626/starred?per_page=100&page={i}"
+    for i in range(1, 25)
+]
 
 # GITHUB_USER=os.environ['GITHUB_USER']
-GITHUB_USER=os.environ['GITHUB_USER']
+# GITHUB_USER=os.environ['GITHUB_USER']
+GITHUB_USER="karminski"
+GITHUB_TOKEN=os.environ['GITHUB_TOKEN']
 database_token=os.environ['DATABASE_TOKEN']
 database_url=os.environ["DATABASE_URL"]
+
 base_url = f"https://github.com/{GITHUB_USER}?tab=stars"
 index = Index(url=database_url, token=database_token)
 app = Flask(__name__)
@@ -42,6 +62,16 @@ def updateRepoStatus():
         # return {"data": "Failed => vecdb"}
         return res
 
+@app.route("/asyncupdate")
+async def asyncupdate():
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"{GITHUB_TOKEN}",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    results = await fetch_multiple_urls(urls, headers, proxy)
+    res = [each for i in results for each in i ]
+    return {"res":res,"len":len(res)}
 
 @app.route('/search', methods=['POST'])
 def search():

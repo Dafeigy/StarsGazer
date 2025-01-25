@@ -16,7 +16,7 @@ function updateStatus(){
     console.log("Syncing Data Now...")
     
     $.ajax({
-        url:"/updateStatus",
+        url:"/asyncupdate",
         type:"get",
         async: true,
         timeout: 30000,
@@ -33,12 +33,12 @@ function updateStatus(){
         success:function (data) {
             document.getElementById("Sync").disabled = false
             $("#userinput").disabled= false
-            $("#status").text(`Repo Nums: ${data.RepoNums}`);
+            $("#status").text(`Repo Nums: ${data.len}`);
             $("#loading").attr("style","display:none;");
             $("#success").attr("style","display:flex;");
             $("#error").attr("style","display:none;");
             $("#debug").append(`<pre><code id="debugcode" class="language-json">[Vecdb] RESULT:</code></pre>`);
-            $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(data, null, '\t')}</code></pre>`);
+            // $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(data.res, null, '\t')}</code></pre>`);
             Prism.highlightAll()
             console.log(data)
         },
