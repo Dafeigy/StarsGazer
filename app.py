@@ -1,15 +1,15 @@
 from flask import Flask, render_template, request
 import utils.getStarsRepo as gAPI
-from config import *
+# from config import *
 import os
 from config import database_token,database_url
 from upstash_vector import Index
-import random
-import time
 
 
 # GITHUB_USER=os.environ['GITHUB_USER']
-GITHUB_USER='dafeigy'
+GITHUB_USER=os.environ['GITHUB_USER']
+database_token=os.environ['DATABASE_TOKEN']
+database_url=os.environ["DATABASE_URL"]
 base_url = f"https://github.com/{GITHUB_USER}?tab=stars"
 index = Index(url=database_url, token=database_token)
 app = Flask(__name__)
@@ -39,20 +39,11 @@ def updateRepoStatus():
             vectors=vectors
         )
         print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
+        return {"RepoNums": len(vectors)}
     except Exception as e:
         # return {"data": "Failed => vecdb"}
         return res
 
-    return {"RepoNums": len(vectors)}
-
-@app.route("/fakesearch")
-def fakesearch():
-    time.sleep(3)
-    return all_res[random.randint(0,5):random.randint(5,10)]
-
-@app.route("/search")
-def realsearch():
-    return "HI"
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -69,4 +60,4 @@ def search():
     else:
         return {"result": "Error. Cannot get search keywords."}
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)

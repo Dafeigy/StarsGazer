@@ -4,10 +4,6 @@ import lxml
 from typing import List, Optional
 
 
-proxy = {
-    'https': "127.0.0.1:7890",
-    'http': "127.0.0.1:7890"
-}
 def find_next(base_url: str, 
              max_depth: int = 100, 
              current_depth: int = 0,
@@ -32,7 +28,7 @@ def find_next(base_url: str,
         return url_list
 
     try:
-        req = requests.get(base_url, headers=headers,proxies=proxy, verify=False)
+        req = requests.get(base_url, headers=headers)
         req.raise_for_status()
         
         soup = BeautifulSoup(req.text, 'lxml')
@@ -63,7 +59,7 @@ def process_single_page(url):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
         "content-type": "text/html; charset=utf-8"
         }
-    req = requests.get(url, headers=headers,verify=False,proxies=proxy)
+    req = requests.get(url, headers=headers)
     soup = BeautifulSoup(req.text, "lxml")
     search_field = soup.find('div', class_ = "col-lg-12")
     langsdiv = search_field.findAll("div", class_='f6 color-fg-muted mt-2')
