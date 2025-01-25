@@ -56,6 +56,7 @@ function realsearch(){
             data: JSON.stringify({"keyword": keyword}),
             beforeSend:function(){
                 results.innerHTML = ''
+                $("#debug").empty()
                 threshold = document.getElementById("threshold").value
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests:\n [${keyword}@${threshold}] send.</code></pre>`);
                 $("#loading").attr("style","display:flex;");
@@ -68,16 +69,17 @@ function realsearch(){
                 console.log(data)
                 var $container = $("#results")
                 $container.empty(); // 清空#results中的内容
-                // $("#debug").empty()
+                
                 $("#loading").attr("style","display:none;");
                 $("#success").attr("style","display:flex;");
                 $("#error").attr("style","display:none;");
                 $("#status").text(`Done.`);
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Results:</code></pre>`);
-                $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(data, null, '\t')}</code></pre>`);
-                Prism.highlightAll()
+
+                
                 $.each(data, function(index, item){
-                    
+                    $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(item.metadata, null, '\t')}</code></pre>`);
+                    Prism.highlightAll()
                     if (index >=3 || item.score < threshold){
                         var html=""
                         $("#status").text(`More rusults => console.`);
@@ -109,7 +111,6 @@ function realsearch(){
                             </div>
                         </div>`
                     }
-                    
                     $container.append(html);
                 });
             },
