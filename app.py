@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
 import utils.getStarsRepo as gAPI
-# from config import *
 import os
-from config import database_token,database_url
 from upstash_vector import Index
 
 
