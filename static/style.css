@@ -19,7 +19,7 @@
 
   }
   to {
-    opacity: .8;
+    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -50,6 +50,7 @@
   padding: 4%;
   overflow: scroll;
   font-size: small;
+  margin-top: 5%;
 
 }
 #debug>pre{
@@ -102,6 +103,8 @@ body{
         height: 100%;
         background-color: #202222;
         text-align: center;
+        display: flex;
+        flex-direction: column;
     }
     #logo{
       margin-top: 5%;
@@ -109,11 +112,10 @@ body{
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3vh;
+      font-size: xx-large;
     }
     #constructing{
       height: 80%;
-      /* background-color: #fff; */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -123,20 +125,23 @@ body{
     #others{
       width: 90%;
       margin-top: 20%;
-      color: #3C3E3F;
+      height: 20%;
+      color: #9c9ca3;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: center;
     }
     #others>h2{
       width: 100%;
       display: flex;
       align-items: center;
-      font-size: auto;
+      font-size: 1vw;
       justify-content: center;
-    }
-    #others>h2>svg{
-      margin-left: 1vw;
+      color: #b4b4b4;
     }
     #others>div{
-      width:80%;
+      width:90%;
       height: auto;
       transition: all 0.2s ease;
       border-radius: .2rem;
@@ -146,12 +151,26 @@ body{
       display: flex;
       align-items: center;
       justify-content: left;
-      cursor: pointer;
-      font-size: small;
+      font-size: .6vw;
     }
-    #others>div:hover{
-      background-color: #3C3E3F;
-      color: #8C9090;
+    #threshold{
+      width: 90%;
+      background-color: #3CB371;
+      color: #3CB371;
+    }
+    #slideValue{
+      color: #3CB371;
+    }
+    #author{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: large;
+        font-family: "Fusion";
+    }
+    #github{
+      display: flex;
     }
     #container{
         width: calc(98% - 30vmin);
@@ -330,6 +349,7 @@ body{
       margin-top: .5%;
       opacity: 0;
       animation: fadein .5s  ease-in-out forwards;
+      font-size: .5vw;
     }
 
 
@@ -391,9 +411,14 @@ body{
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: all .2s linear;
     }
     .link>a{
-      color: #8C9090;
+      color: #fff;
+    }
+
+    .link:hover{
+      background-color: #3CB371;
     }
   
   }

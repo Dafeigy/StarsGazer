@@ -1,4 +1,5 @@
 Prism.highlightAll()
+var threshold = 0.75;
 function updateStatus(){
     document.getElementById("Sync").disabled = true
     console.log("Syncing Data Now...")
@@ -54,11 +55,14 @@ function realsearch(){
             contentType: "application/json",
             data: JSON.stringify({"keyword": keyword}),
             beforeSend:function(){
-                $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests send.</code></pre>`);
+                results.innerHTML = ''
+                threshold = document.getElementById("threshold").value
+                $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests:\n [${keyword}@${threshold}] send.</code></pre>`);
                 $("#loading").attr("style","display:flex;");
                 $("#success").attr("style","display:none;");
                 $("#error").attr("style","display:none;");
                 $("#status").text(`Searching now...`);
+
             },
             success:function (data) {
                 console.log(data)
@@ -73,7 +77,8 @@ function realsearch(){
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(data, null, '\t')}</code></pre>`);
                 Prism.highlightAll()
                 $.each(data, function(index, item){
-                    if (index >=3 || item.score < 0.75){
+                    
+                    if (index >=3 || item.score < threshold){
                         var html=""
                         $("#status").text(`More rusults => console.`);
                     }
@@ -154,3 +159,7 @@ $("#userinput").keydown( function(event){
       event.preventDefault();//禁止回车的默认换行
     }
   });
+
+$('#threshold').bind('input propertychange', function() {  
+    $('#slideValue').html($(this).val());  
+});  

@@ -1,7 +1,22 @@
-## Targets
+## What is this:
 
-Help search the specific repo among your starred repos.
+Help you search the specific repo among your(Currently my) starred repos.
+
+It will be reconstruct in FastAPI + Vue3.
+
+
+
+![alt text](imgs/image.png)
 
 ## Tech
 
-Vercel. Database. Front/Backend.
+Vercel + Flask + Ajax 
+
+## Thanks
+
+- @Fusion-Pixel
+
+- @Vercel
+
+- @Cline + Deepseekv2.5
+
