@@ -53,17 +53,16 @@ async def asyncupdate():
     except Exception as e:
         print(e)
         return {"res":"Error Fetching <=Github", "len": "null"}
-    print(results)
-    results = [subitem for item in results for subitem in item]
-    print("\n\n")
-    print(results)
-    vectors = [
-            Vector(f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(results[::-1])
-        ]
+    results = [subitem for item in results for subitem in item][::-1]
+    chunk_list = [results[i:i+1000] for i in range(0, len(results), 1000)]
     try:
-        vecdb_res = index.upsert(
-                vectors=vectors
-            )
+        for each in chunk_list:
+            vectors = [
+                Vector(f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(each)
+            ]
+            vecdb_res = index.upsert(
+                    vectors=vectors
+                )
         print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
         return {"res":vecdb_res,"len":len(results)}
     except Exception as e:
