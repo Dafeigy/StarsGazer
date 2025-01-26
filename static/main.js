@@ -97,7 +97,7 @@ function realsearch(){
                     Prism.highlightAll()
                     if (index >=3 || item.score < threshold){
                         var html=""
-                        $("#status").text(`More rusults => console.`);
+                        $("#status").text(`Console <= More Results. @${et -st} milsecs.`);
                     }
                     else{
                         var html = `                    <div class="result">
