@@ -35,7 +35,7 @@ function updateStatus(){
             document.getElementById("Sync").disabled = false
             var et = new Date().getTime()
             $("#userinput").disabled= false
-            $("#status").text(`Repo Nums: ${data.len} @${((et - st)/1000).toFixed(3)} sec.`);
+            $("#status").text(`${data.len} Repos@${((et - st)/1000).toFixed(3)} sec.`);
             $("#loading").attr("style","display:none;");
             $("#success").attr("style","display:flex;");
             $("#error").attr("style","display:none;");
