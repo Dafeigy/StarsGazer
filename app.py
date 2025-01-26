@@ -54,7 +54,8 @@ def home():
 async def asyncupdate():
     try:
         results = await fetch_multiple_urls(GITHUB_USER, headers)
-    except:
+    except Exception as e:
+        print(e)
         return {"res":"Error Fetching <=Github", "len": "null"}
     print(results)
     results = [subitem for item in results for subitem in item]
@@ -69,7 +70,8 @@ async def asyncupdate():
             )
         print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
         return {"res":vecdb_res,"len":len(results)}
-    except:
+    except Exception as e:
+        print(e)
         return {"res": "[Vecdb] Error Indexing data."}
     
     # return {"RepoNums": len(vectors)}
