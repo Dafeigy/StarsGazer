@@ -19,7 +19,6 @@ headers = {
     "X-GitHub-Api-Version": "2022-11-28",
 }
 
-proxy="http://127.0.0.1:7890"
 def get_params(GITHUB_USER):
     url = f"https://github.com/{GITHUB_USER}?tab=stars"
     req = requests.get(url, 
@@ -31,23 +30,23 @@ def get_params(GITHUB_USER):
     user_id = soup.find("a", attrs={"itemprop": "image"}).get("href").replace("https://avatars.githubusercontent.com/u/",'')[:-4]
     return user_id, int(stars_num)//100+1
 
-async def fetch_with_(url, headers, proxy):
+async def fetch_with_(url, headers):
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, headers=headers, proxy=proxy) as response:
+        async with session.get(url, headers=headers) as response:
             return await response.json()
 
-async def fetch_multiple_urls(github_user, headers, proxy):
+async def fetch_multiple_urls(github_user, headers):
     user_id, stars_num = get_params(github_user)
     urls = [
     f"https://api.github.com/user/{user_id}/starred?per_page=100&page={i}"
     for i in range(1, stars_num+1)
 ]
-    tasks = [fetch_with_(url, headers, proxy) for url in urls]
+    tasks = [fetch_with_(url, headers) for url in urls]
     return await asyncio.gather(*tasks)
 
 
 async def main():
-    results = await fetch_multiple_urls(GITHUB_USER, headers, proxy)
+    results = await fetch_multiple_urls(GITHUB_USER, headers)
     results = [subitem for item in results for subitem in item]
     return results
 
@@ -87,7 +86,7 @@ def updateRepoStatus():
 @app.route("/asyncupdate")
 async def asyncupdate():
     try:
-        results = await fetch_multiple_urls(GITHUB_USER, headers, proxy)
+        results = await fetch_multiple_urls(GITHUB_USER, headers)
     except:
         return {"res":"Error Fetching <=Github", "len": "null"}
     
