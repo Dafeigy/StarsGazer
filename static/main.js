@@ -68,7 +68,7 @@ function realsearch(){
                 results.innerHTML = ''
                 $("#debug").empty()
                 threshold = document.getElementById("threshold").value
-                $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests:\n [${keyword}@${threshold}] send.</code></pre>`);
+                $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests:\n"${keyword}@${threshold}".</code></pre>`);
                 $("#loading").attr("style","display:flex;");
                 $("#success").attr("style","display:none;");
                 $("#error").attr("style","display:none;");
