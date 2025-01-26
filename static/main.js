@@ -103,7 +103,7 @@ function realsearch(){
                             <div class="info">
                                 <div class="repo">
                                     <div>
-                                        <div class="title"><a href="${item.metadata.clone_url}">${item.metadata.full_name}</a></div>
+                                        <div class="title"><a href="${item.metadata.clone_url} " target="_blank">${item.metadata.full_name}</a></div>
                                         <div class="desc">${item.metadata.description || "Woops! It seems no info about this repo :("}</div>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@ function realsearch(){
                                 </div>
                             </div>
                             <div class="link">
-                                <a href="${item.metadata.Link}" target="_blank"><?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 5H8V9H6V3H22V21H6V15H8V19H20V5Z" fill="currentColor"/><path d="M13.0743 16.9498L11.6601 15.5356L14.1957 13H2V11H14.1956L11.6601 8.46451L13.0743 7.05029L18.024 12L13.0743 16.9498Z" fill="currentColor"/></svg></a>
+                                <a href="${item.metadata.clone_url}" target="_blank"><?xml version="1.0" ?><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 5H8V9H6V3H22V21H6V15H8V19H20V5Z" fill="currentColor"/><path d="M13.0743 16.9498L11.6601 15.5356L14.1957 13H2V11H14.1956L11.6601 8.46451L13.0743 7.05029L18.024 12L13.0743 16.9498Z" fill="currentColor"/></svg></a>
                             </div>
                         </div>`
                     }
