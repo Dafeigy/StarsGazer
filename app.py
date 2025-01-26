@@ -42,12 +42,6 @@ async def fetch_multiple_urls(github_user, headers):
     tasks = [fetch_with_(url, headers) for url in urls]
     return await asyncio.gather(*tasks)
 
-
-async def main():
-    results = await fetch_multiple_urls(GITHUB_USER, headers)
-    results = [subitem for item in results for subitem in item]
-    return results
-
 base_url = f"https://github.com/{GITHUB_USER}?tab=stars"
 index = Index(url=database_url, token=database_token)
 app = Flask(__name__)
@@ -93,7 +87,7 @@ async def asyncupdate():
             (f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(results[::-1])
         ]
     try:
-        vecdb_res = index.upsert(
+        vecdb_res = index.update(
                 vectors=vectors
             )
         print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
