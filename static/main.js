@@ -90,14 +90,14 @@ function realsearch(){
                 $("#error").attr("style","display:none;");
                 $("#status").text(`Done. @${et -st} milsecs.`);
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Results:</code></pre>`);
-
+                $("#status").text(`Search Cost: @${et -st} milsecs.`);
                 
                 $.each(data, function(index, item){
                     $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(item.metadata, null, '\t')}</code></pre>`);
                     Prism.highlightAll()
                     if (index >=3 || item.score < threshold){
                         var html=""
-                        $("#status").text(`Console <= More Results. @${et -st} milsecs.`);
+                        
                     }
                     else{
                         var html = `                    <div class="result">
