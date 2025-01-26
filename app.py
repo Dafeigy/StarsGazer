@@ -53,12 +53,12 @@ async def asyncupdate():
     except Exception as e:
         print(e)
         return {"res":"Error Fetching <=Github", "len": "null"}
-    results = [subitem for item in results for subitem in item][::-1]
+    results = [subitem for item in results for subitem in item]
     chunk_list = [results[i:i+1000] for i in range(0, len(results), 1000)]
     try:
-        for each in chunk_list:
+        for cindex, each in enumerate(chunk_list):
             vectors = [
-                Vector(f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(each)
+                (f"id{cindex*1000 + index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(each)
             ]
             vecdb_res = index.upsert(
                     vectors=vectors
