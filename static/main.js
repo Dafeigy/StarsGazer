@@ -35,7 +35,7 @@ function updateStatus(){
             document.getElementById("Sync").disabled = false
             var et = new Date().getTime()
             $("#userinput").disabled= false
-            $("#status").text(`Repo Nums: ${data.len}@${et - st} milsecs`);
+            $("#status").text(`Repo Nums: ${((et -st)/1000).toFixed(3)} sec.`);
             $("#loading").attr("style","display:none;");
             $("#success").attr("style","display:flex;");
             $("#error").attr("style","display:none;");
@@ -88,9 +88,8 @@ function realsearch(){
                 $("#loading").attr("style","display:none;");
                 $("#success").attr("style","display:flex;");
                 $("#error").attr("style","display:none;");
-                $("#status").text(`Done. @${et -st} milsecs.`);
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Results:</code></pre>`);
-                $("#status").text(`Search Cost: @${et -st} milsecs.`);
+                $("#status").text(`Search Cost: ${((et -st)/1000).toFixed(3)} sec.`);
                 
                 $.each(data, function(index, item){
                     $("#debug").append(`<pre><code id="debugcode" class="language-json">${JSON.stringify(item.metadata, null, '\t')}</code></pre>`);
