@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import utils.getStarsRepo as gAPI
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -19,10 +18,7 @@ headers = {
 
 def get_params(GITHUB_USER):
     url = f"https://github.com/{GITHUB_USER}?tab=stars"
-    req = requests.get(url, 
-                       headers={"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0","content-type": "text/html; charset=utf-8"}, 
-                       proxies={"https": "127.0.0.1:7890", "http": "127.0.0.1:7890"}
-                       )
+    req = requests.get(url, headers={"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0","content-type": "text/html; charset=utf-8"})
     soup=BeautifulSoup(req.text, 'lxml')
     stars_num = soup.find("a", attrs={"aria-current":"page"}).find("span",class_="Counter").get("title").replace(",","")
     user_id = soup.find("a", attrs={"itemprop": "image"}).get("href").replace("https://avatars.githubusercontent.com/u/",'')[:-4]
