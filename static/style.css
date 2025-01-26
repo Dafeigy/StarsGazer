@@ -384,7 +384,7 @@ body{
 
     .stats{
       margin-top: 1.5vh;
-      font-size: smaller;
+      font-size: small;
       color: #8C9090;
       padding-left: 2%;
       user-select: none;
@@ -400,9 +400,11 @@ body{
     
     .forks,.stars{
       padding-left: .5%;
+      font-size: small;
     }
     .sim{
       color: #3CB371;
+      font-size: small;
     }
     .info{
       width: 90%;

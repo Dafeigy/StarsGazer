@@ -7,6 +7,7 @@ import lxml
 GITHUB_TOKEN=os.environ['GITHUB_TOKEN']
 GITHUB_USER='karminski'
 proxy = "http://127.0.0.1:7890"
+
 def get_params(GITHUB_USER):
     url = f"https://github.com/{GITHUB_USER}?tab=stars"
     req = requests.get(url, 
@@ -31,7 +32,6 @@ async def fetch_multiple_urls(github_user, headers, proxy):
 ]
     tasks = [fetch_with_(url, headers, proxy) for url in urls]
     return await asyncio.gather(*tasks)
-
 
 
 headers = {
