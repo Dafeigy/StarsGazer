@@ -33,7 +33,7 @@ function updateStatus(){
         },
         success:function (data) {
             document.getElementById("Sync").disabled = false
-            var et = new Date.getTime()
+            var et = new Date().getTime()
             $("#userinput").disabled= false
             $("#status").text(`Repo Nums: ${data.len}@${et - st} milsecs`);
             $("#loading").attr("style","display:none;");
@@ -60,7 +60,7 @@ function updateStatus(){
 function realsearch(){
     // var keyword = document.getElementById("userinput").text
     var keyword = $("#userinput").val()
-    var st = new Date.getTime()
+    var st = new Date().getTime()
     if (keyword.length >=6){
         $.ajax({
             url:"/search",
@@ -84,7 +84,7 @@ function realsearch(){
                 console.log(data)
                 var $container = $("#results")
                 $container.empty(); // 清空#results中的内容
-                var et = new Date.getTime()
+                var et = new Date().getTime()
                 $("#loading").attr("style","display:none;");
                 $("#success").attr("style","display:flex;");
                 $("#error").attr("style","display:none;");
