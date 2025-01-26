@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import os
 import requests
 from bs4 import BeautifulSoup
-from upstash_vector import Index
+from upstash_vector import Index,Vector
 import aiohttp
 import asyncio
 
@@ -58,7 +58,7 @@ async def asyncupdate():
     print("\n\n")
     print(results)
     vectors = [
-            (f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(results[::-1])
+            Vector(f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(results[::-1])
         ]
     try:
         vecdb_res = index.upsert(
