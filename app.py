@@ -7,9 +7,7 @@ from upstash_vector import Index
 import aiohttp
 import asyncio
 
-# GITHUB_USER=os.environ['GITHUB_USER']
-# GITHUB_USER=os.environ['GITHUB_USER']
-GITHUB_USER="dafeigy"
+GITHUB_USER=os.environ['GITHUB_USER']
 GITHUB_TOKEN=os.environ['GITHUB_TOKEN']
 database_token=os.environ['DATABASE_TOKEN']
 database_url=os.environ["DATABASE_URL"]
