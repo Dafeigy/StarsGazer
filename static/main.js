@@ -100,7 +100,7 @@ function realsearch(){
                                 <div class="repo">
                                     <div>
                                         <div class="title"><a href="${item.metadata.clone_url}">${item.metadata.full_name}</a></div>
-                                        <div class="desc">${item.metadata.description || "Woops theres no info about this repo"}</div>
+                                        <div class="desc">${item.metadata.description || "Woops! It seems no info about this repo :("}</div>
                                     </div>
                                 </div>
                                 <div class="stats">
