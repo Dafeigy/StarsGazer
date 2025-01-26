@@ -397,7 +397,9 @@ body{
       margin-right: 1%;
       color: #2eb1b1;
     }
-    
+    .starlogo{
+      margin-left: 0;
+    }
     .forks,.stars{
       padding-left: .5%;
       font-size: small;

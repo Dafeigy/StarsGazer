@@ -69,6 +69,7 @@ function realsearch(){
                 $("#debug").empty()
                 threshold = document.getElementById("threshold").value
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Requests:\n"${keyword}@${threshold}".</code></pre>`);
+                Prism.highlightAll()
                 $("#loading").attr("style","display:flex;");
                 $("#success").attr("style","display:none;");
                 $("#error").attr("style","display:none;");
