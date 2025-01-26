@@ -14,6 +14,7 @@ document.getElementById("userinput").addEventListener('input', function(){
 function updateStatus(){
     document.getElementById("Sync").disabled = true
     console.log("ASyncing Data Now...")
+    var st = new Date().getTime()
     $.ajax({
         url:"/asyncupdate",
         type:"get",
@@ -22,6 +23,7 @@ function updateStatus(){
         beforeSend:function(){
             $("#userinput").disabled = true
             document.getElementById("Sync").disabled = true
+            
             $("#status").text(`ASyncing now...`);
             $("#loading").attr("style","display:flex;");
             $("#success").attr("style","display:none;");
@@ -31,8 +33,9 @@ function updateStatus(){
         },
         success:function (data) {
             document.getElementById("Sync").disabled = false
+            var et = new Date.getTime()
             $("#userinput").disabled= false
-            $("#status").text(`Repo Nums: ${data.len}`);
+            $("#status").text(`Repo Nums: ${data.len}@${et - st} milsecs`);
             $("#loading").attr("style","display:none;");
             $("#success").attr("style","display:flex;");
             $("#error").attr("style","display:none;");
@@ -57,6 +60,7 @@ function updateStatus(){
 function realsearch(){
     // var keyword = document.getElementById("userinput").text
     var keyword = $("#userinput").val()
+    var st = new Date.getTime()
     if (keyword.length >=6){
         $.ajax({
             url:"/search",
@@ -80,11 +84,11 @@ function realsearch(){
                 console.log(data)
                 var $container = $("#results")
                 $container.empty(); // 清空#results中的内容
-                
+                var et = new Date.getTime()
                 $("#loading").attr("style","display:none;");
                 $("#success").attr("style","display:flex;");
                 $("#error").attr("style","display:none;");
-                $("#status").text(`Done.`);
+                $("#status").text(`Done. @${et -st} milsecs.`);
                 $("#debug").append(`<pre><code id="debugcode" class="language-json">[Search] Results:</code></pre>`);
 
                 
