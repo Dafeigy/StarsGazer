@@ -50,44 +50,21 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route("/updateStatus")
-def updateRepoStatus():
-    global index
-    all_urls = gAPI.find_next(base_url)
-    res = []
-    try:
-        for each in all_urls:
-            res += gAPI.process_single_page(each)
-    except Exception as e:
-        return {"data": "Failed => Github"}
-    print(f"[Github]Sync starred repos from Github user {GITHUB_USER}: Success.")
-    try:
-        vectors = [
-            (f"id{index+1}",f"{value['RepoName']}: {value['Description']}",value) for index,value in enumerate(res[::-1])
-        ]
-        
-        vecdb_res = index.upsert(
-            vectors=vectors
-        )
-        print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")
-        return {"RepoNums": len(vectors)}
-    except Exception as e:
-        # return {"data": "Failed => vecdb"}
-        return res
-
 @app.route("/asyncupdate")
 async def asyncupdate():
     try:
         results = await fetch_multiple_urls(GITHUB_USER, headers)
     except:
         return {"res":"Error Fetching <=Github", "len": "null"}
-    
+    print(results)
     results = [subitem for item in results for subitem in item]
+    print("\n\n")
+    print(results)
     vectors = [
             (f"id{index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(results[::-1])
         ]
     try:
-        vecdb_res = index.update(
+        vecdb_res = index.upsert(
                 vectors=vectors
             )
         print(f"[Upstash] Upload data to vecdb: {vecdb_res}.")

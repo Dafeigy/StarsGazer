@@ -13,8 +13,7 @@ document.getElementById("userinput").addEventListener('input', function(){
 
 function updateStatus(){
     document.getElementById("Sync").disabled = true
-    console.log("Syncing Data Now...")
-    
+    console.log("ASyncing Data Now...")
     $.ajax({
         url:"/asyncupdate",
         type:"get",
@@ -23,7 +22,7 @@ function updateStatus(){
         beforeSend:function(){
             $("#userinput").disabled = true
             document.getElementById("Sync").disabled = true
-            $("#status").text(`Syncing now...`);
+            $("#status").text(`ASyncing now...`);
             $("#loading").attr("style","display:flex;");
             $("#success").attr("style","display:none;");
             $("#error").attr("style","display:none;");
