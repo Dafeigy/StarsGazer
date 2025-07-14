@@ -55,6 +55,7 @@ async def asyncupdate():
         return {"res":"Error Fetching <=Github", "len": "null"}
     results = [subitem for item in results for subitem in item]
     chunk_list = [results[i:i+1000] for i in range(0, len(results), 1000)]
+    chunk_list = chunk_list[::-1]
     try:
         for cindex, each in enumerate(chunk_list):
             vectors = [
