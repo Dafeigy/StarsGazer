@@ -24,7 +24,7 @@ function updateStatus(){
             $("#userinput").disabled = true
             document.getElementById("Sync").disabled = true
             
-            $("#status").text(`ASyncing now...`);
+            $("#status").text(`Syncing now...`);
             $("#loading").attr("style","display:flex;");
             $("#success").attr("style","display:none;");
             $("#error").attr("style","display:none;");

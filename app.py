@@ -58,7 +58,7 @@ async def asyncupdate():
     try:
         for cindex, each in enumerate(chunk_list):
             vectors = [
-                (f"id{cindex*1000 + index+1}",f"{value['full_name']}: {value['description']}",value) for index,value in enumerate(each)
+                (f"id{cindex*1000 + _index+1}",f"{value['full_name']}: {value['description']}",value) for _index,value in enumerate(each)
             ]
             vecdb_res = index.upsert(
                     vectors=vectors
