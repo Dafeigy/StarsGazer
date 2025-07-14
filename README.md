@@ -1,26 +1,46 @@
 ## What is this:
 
-Help you search the specific repo among your(Currently my) starred repos.
+Help you search the specific repo among your (Currently my) starred repos.
 
 It will be reconstruct in FastAPI + Vue3.
 
-
-
 ![alt text](imgs/image.png)
 
-## Tech
+## Develop
 
-Vercel + Flask + Ajax 
+1. You need to setup a python dev environment:
+
+    ```bash
+    python -m venv .venv
+
+    ## For bash user (Recommand)
+    source ./.venv/Script/activate
+
+    ## For Powershell user
+    source ./.venv/Script/activate.ps1
+
+    ## Install dependency
+    pip install -r requirements.txt
+
+    ## create `.env.local` (bash)
+    touch .env.local
+    ```
+
+2. Next, follow `.env.local.template` to change your configuration to `.env.local`.
+
+3. export all environmental variables in your terminal. For example, when I use git bash, I run `source load_env.sh` to export them.
+
+4. Enjoy your dev.
+
+
 
 ## Thanks
 
-- @Fusion-Pixel
+- @Fusion-Pixel. Beautiful pixel style font, my favourite.
 
-- @Vercel
+- @Vercel. Free sidework projects' sweey home.
 
-- @Cline + Deepseekv2.5
-
-## How to fetch users' stars info with high effiency?
+## (Additional) How to fetch users' stars info with high effiency?
 
 Github RESTAPI provides an [endpoint](https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-repositories-starred-by-a-user) to get user's starred repo info(BTW it hides very deep).
 This endpoint supports [pagination](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28),
@@ -41,4 +61,4 @@ To do so, however, requires both sync/async methods. Here are the steps:
     ]
     ```
     until this part, all should be done sync.
-4. @Async fetch urls. It works fine.
+4. @Async fetch urls. It works fine. 
